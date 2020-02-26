@@ -12,8 +12,8 @@ class LRUCache:
         # 
         self.limit = limit
         self.size = 0
-        self.order = DoublyLinkedList()
-        self.storage = dict()
+        self.order = DoublyLinkedList() # 
+        self.storage = dict() # or {} -- same thing
 
     """
     Retrieves the value associated with the given key. Also
@@ -51,16 +51,54 @@ class LRUCache:
                 # simply delete the tail entry from the DLL and the has table
         # Create node if key not found
         # Move node to front (head) if key not found
+
         if key in self.storage:
-            node = self.storage[key]
-            node.value = (key, value)
+            node = self.storage[key] # grabbing the full node
+            node.value = (key, value) # overwritting the value but keeping the k/v pair
             self.order.move_to_end(node) # node is a pointer here + MRU
-            return
-        # If full, remove lasy node from LL and the hash map / dictionary
-        if self.size == self.limit:
-            del self.storage[self.order.head.value[0]]
-            self.order.remove_from_head()
-            self.size -= 1
+            return # nothing else to do, exit the function
+        # If full, remove last node from LL and the hash map / dictionary
+        if self.size == self.limit: # check if its full
+            del self.storage[self.order.head.value[0]] # remove LRU from dict 
+            self.order.remove_from_head() # remove from LL
+            self.size -= 1  # 
         self.order.add_to_tail((key, value))
         self.storage[key] = self.order.tail
         self.size += 1
+
+
+# In class notes--
+        # If the cache is empty
+            # Add to linked list with the key and value
+            # Add the key and value to the dictionary
+            # increment the size
+        # If cache is not empty
+            # check if key is in dictionary
+                # if it is
+                    # overwrite the value
+                    # move it to the MRU end of list
+                # if it is not
+                    # check if its full
+                        # if cache is not full
+                            # same as if cache is empty
+                        # if cache is full
+                            # remove the LRU from the dictionary and LL
+                            # reduce the size
+                            # same as if cache is empty
+
+    # Re- organizing top pseudo
+
+        # check if key is in dictionary
+            # if it is
+                # overwrite the value
+                # move it to the MRU end of list
+            # if it is not
+                    # check if its full
+                        # if cache is full
+                            # remove the LRU from the dictionary and LL
+                            # reduce the size
+            # Add to linked list with the key and value
+            # Add the key and value to the dictionary
+            # increment the size
+        
+
