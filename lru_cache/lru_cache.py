@@ -1,3 +1,5 @@
+from doubly_linked_list import DoublyLinkedList
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -7,7 +9,11 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        pass
+        # 
+        self.limit = limit
+        self.size = 0
+        self.order = DoublyLinkedList()
+        self.storage = dict()
 
     """
     Retrieves the value associated with the given key. Also
@@ -17,7 +23,15 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        # Access value from given key
+        # Move key/value pair to the MRU end of list
+        # Return value or None if None
+        if key in self.storage[key]:
+            node = self.storage[key] # need to move to tail because it was MRU
+            self.order.move_to_end(node)
+            return node.value[1] # accessing the value in the key/value pair
+        else:
+            return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -30,4 +44,23 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        # Put/Set:
+            # Move to head of list
+            # Add hash table entry (MRU)
+            # If over-full
+                # simply delete the tail entry from the DLL and the has table
+        # Create node if key not found
+        # Move node to front (head) if key not found
+        if key in self.storage:
+            node = self.storage[key]
+            node.value = (key, value)
+            self.order.move_to_end(node) # node is a pointer here + MRU
+            return
+        # If full, remove lasy node from LL and the hash map / dictionary
+        if self.size == self.limit:
+            del self.storage[self.order.head.value[0]]
+            self.order.remove_from_head()
+            self.size -= 1
+        self.order.add_to_tail((key, value))
+        self.storage[key] = self.order.tail
+        self.size += 1
