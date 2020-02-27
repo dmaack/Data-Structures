@@ -32,10 +32,10 @@ Contains / Find -- on average O(logn) -- everytime you go one direction, you cut
         -return false
     - Compare value to root
         - if its root then return
-    - if value is less than node
+    - if target is less than node
         - go left and repeat
         - if no left child -- return none
-    - if value is greater or equal to node
+    - if target is greater or equal to node
         - go right and repeat
         - if no right child -- return none
 
@@ -45,4 +45,71 @@ Get Max --
 
 
 
+Day 2 lecture notes:
+
+    re-psuedo coding for solutions:
+
+    Insert:
+        - if value is less than node.value, look left
+            - check if something is there
+                -if something is there 
+                    - recurse left
+                - else if not
+                    - insert left
+        - otherwise if value is greater or equal to than node.value, look right
+            - check if something is there
+                - if something is there
+                    - recurse right
+                - else if not
+                    - insert right
+
+        INSERT CODE SOLUTION:
+
+        if value < self.value
+            if self.left:
+                self.insert(value)
+            else:
+                self.left = BinarySearchTree(value)
+        if value >= self.value:
+            if self.right:
+                self.insert(value)
+            else:
+                self.left = BinarySearchTree(value)        
+
+- what is the base case for the insert function?
+    - it creates a new node
+    - you cant call the insert function unless you have created a node
+    
+
+    Conatins / Find:
+        -
+
+    CONTAINS CODE SOLUTION:
+
+    if self.value == target:
+        return True
+    if self.value < target:
+        if self.left:
+            return self.left.contains(target)
+        else:
+            return False
+    if self.value >= target:
+        if self.right:
+            return self.right.contains(target)
+        else:
+            return False 
+
+
+- what is the clue that we need to write a base case?
+    - we have a target and we do that by returning information
+        - where does function exit when you return true? 
+            - 
+
+
+    GET MAX CODE SOLUTION:
+
+    if not self.right:
+        return self.value
+    else:
+        return self.right.get_max()
 '''
