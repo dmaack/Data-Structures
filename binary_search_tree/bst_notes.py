@@ -43,7 +43,7 @@ Get Max --
     - While you can go right go right
     - If no right child, return this value, otherwise go right
 
-
+------------------------------------------------------------------------------------------------
 
 Day 2 lecture notes:
 
@@ -112,4 +112,43 @@ Day 2 lecture notes:
         return self.value
     else:
         return self.right.get_max()
+
+
+
+    For Each:
+        - call cb on self.value
+        - if left
+            - call for each
+        - if right 
+            call for each 
+
+
+
+
+Breadth-first search:
+    Pseudocode:
+        - initalize a queue
+        - push root to queue
+        - while queue is not empty
+        - Pop top item out of queue into temp
+        - if temp has a right put into queue
+        - DO the thing
+        - if temp has a left put into queue
+
+
+Depth-first search:
+    Pseudocode:
+        - initialize a stack
+        - Push root to stack
+        - while stack is not empty
+        - Pop top item out of stack into temp
+        - If temp has right put into stack
+        - If temp has left put into stack
+        - Discard temp and pop 
+
+
+
 '''
+
+
+
