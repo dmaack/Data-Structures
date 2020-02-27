@@ -16,17 +16,24 @@ Pseudocode for functions:
 
 
 Insert --
-    - compare root node
-        - if lesser go to left child
-        - if greater go to right child
+    -if there is no node at root, insert this as root
+    Otherwise:
+    - compare value to root node
+        - if value lesser go (look) to left child
+            - if no node, make new one with this value
+        - if value greater or equal go to right child
+            - if no node, make new one with this value
         - if no child, insert
         - else try again starting from the child on the appropriate side
 
-Contains / Find --
-    - Look at root
+
+Contains / Find -- on average O(logn) -- everytime you go one direction, you cut off half of the results | worst case O(n) because it could look like something like a LL
+    - If no node at root 
+        -return false
+    - Compare value to root
         - if its root then return
     - if value is less than node
-        - go left and repear
+        - go left and repeat
         - if no left child -- return none
     - if value is greater or equal to node
         - go right and repeat
