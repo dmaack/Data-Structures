@@ -16,7 +16,7 @@ Pseudocode for functions:
 
 
 Insert --
-    -if there is no node at root, insert this as root
+    -if there is no node at root, insert this as root -- base case!
     Otherwise:
     - compare value to root node
         - if value lesser go (look) to left child
@@ -40,7 +40,8 @@ Contains / Find -- on average O(logn) -- everytime you go one direction, you cut
         - if no right child -- return none
 
 Get Max --
-    - Go right until no more right
+    - While you can go right go right
+    - If no right child, return this value, otherwise go right
 
 
 

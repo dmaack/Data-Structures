@@ -29,9 +29,17 @@ class LRUCache:
         if key in self.storage[key]:
             node = self.storage[key] # need to move to tail because it was MRU
             self.order.move_to_end(node)
-            return node.value[1] # accessing the value in the key/value pair
+            return node.value[1] # return value by accessing the value in the key/value pair
         else:
             return None
+
+        
+        # if key is in storage
+            # move it to the end
+            # return the value
+        
+        # if key is not in storage
+            # return none
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -61,10 +69,10 @@ class LRUCache:
         if self.size == self.limit: # check if its full
             del self.storage[self.order.head.value[0]] # remove LRU from dict 
             self.order.remove_from_head() # remove from LL
-            self.size -= 1  # 
-        self.order.add_to_tail((key, value))
-        self.storage[key] = self.order.tail
-        self.size += 1
+            self.size -= 1  # reduce the size
+        self.order.add_to_tail((key, value)) # adding to LL
+        self.storage[key] = self.order.tail # adding the whole node to dictionary 
+        self.size += 1 # increase size
 
 
 # In class notes--
@@ -101,4 +109,8 @@ class LRUCache:
             # Add the key and value to the dictionary
             # increment the size
         
+
+
+# What is more expensive? adding the whole node or storing the ?
+    # references are not free but they are about as free as they can get because they are just pointers to the same data
 

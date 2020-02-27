@@ -13,26 +13,20 @@ class BinarySearchTree: # more like SLL for the stack prob
 
     # Insert the given value into the tree
     def insert(self, value):
-        root = self 
+        root = self
         new_node = BinarySearchTree(value)
 
-        if root == None:
-            # new_node.value = root
-            root = new_node.value
-            # return
-        elif new_node.value < root.value:
-            if root.left == None:
+        if value < root.value:
+            if root.left is None:
                 root.left = new_node
             else:
-                root.left
-        elif new_node.value >= root.value:
-            if root.right == None:
+                root.left.insert(value)
+        elif value >= root.value:
+            if root.right is None:
                 root.right = new_node
             else:
-                root.right
+                root.right.insert(value)
 
-        
-            
 
     # Return True if the tree contains the value
     # False if it does not
@@ -41,12 +35,18 @@ class BinarySearchTree: # more like SLL for the stack prob
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        root = self
+
+        if root.right is None:
+            return root.value
+        else:
+            return self.right.get_max()
+        
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
-        pass
+        pass # queue?
 
     # DAY 2 Project -----------------------
 
